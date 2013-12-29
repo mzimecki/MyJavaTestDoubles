@@ -9,7 +9,7 @@
       org.hsqldb.jdbcDriver
      </property>
     <property name="hibernate.connection.url">
-      jdbc:hsqldb:mem:wgjd
+      jdbc:hsqldb:mem:myHsqld
     </property>
     <property name="hibernate.connection.username">sa</property>
     <property name="hibernate.connection.password"/>
