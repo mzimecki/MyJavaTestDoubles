@@ -1,6 +1,8 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 
@@ -9,7 +11,9 @@ import main.MyBankAccount;
 import main.hibernate.BankAccountHibernateDao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,13 +23,18 @@ import org.junit.Test;
 public class BankAccountHibernateDaoTest {
 
 	private static SessionFactory factory;
+	private static ServiceRegistry serviceRegistry;
 	private static BankAccountHibernateDao accDao;
 	private BankAccount acc1;
 	private BankAccount acc2;
 
 	@BeforeClass
 	public static void baseSetUp() {
-		factory = new Configuration().configure().buildSessionFactory();
+		Configuration cfg = new Configuration();
+		cfg.configure();
+		serviceRegistry = new StandardServiceRegistryBuilder()
+			.applySettings(cfg.getProperties()).build();
+		factory = cfg.buildSessionFactory(serviceRegistry);
 		accDao = new BankAccountHibernateDao(factory);
 	}
 
@@ -51,8 +60,8 @@ public class BankAccountHibernateDaoTest {
 		assertNotNull(bankAccount2);
 		assertEquals(new BigDecimal(10.0), bankAccount1.getBalance());
 		assertEquals(new BigDecimal(20.0), bankAccount2.getBalance());
-		
-		//get not existing one
+
+		// get not existing one
 		BankAccount bankAccount3 = accDao.findAccountById(3L);
 		assertNull(bankAccount3);
 	}
@@ -61,5 +70,4 @@ public class BankAccountHibernateDaoTest {
 	public static void baseTearDown() {
 		factory.close();
 	}
-
 }
