@@ -22,8 +22,12 @@ public class BankAccountHibernateDao {
 	public BankAccount findAccountById(long ticketId) {
 		Criteria criteria = session.createCriteria(BankAccount.class);
 		criteria.add(Restrictions.eq("accountId", ticketId));
-		List<BankAccount> tickets = criteria.list();
-		return tickets.get(0);
+		List<BankAccount> bankAccounts = criteria.list();
+		if (!bankAccounts.isEmpty()) {
+			return bankAccounts.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	public void save(BankAccount account) {

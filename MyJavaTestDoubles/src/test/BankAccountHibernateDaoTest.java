@@ -51,6 +51,10 @@ public class BankAccountHibernateDaoTest {
 		assertNotNull(bankAccount2);
 		assertEquals(new BigDecimal(10.0), bankAccount1.getBalance());
 		assertEquals(new BigDecimal(20.0), bankAccount2.getBalance());
+		
+		//get not existing one
+		BankAccount bankAccount3 = accDao.findAccountById(3L);
+		assertNull(bankAccount3);
 	}
 
 	@AfterClass

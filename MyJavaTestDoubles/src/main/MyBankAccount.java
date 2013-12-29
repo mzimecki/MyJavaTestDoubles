@@ -3,6 +3,7 @@ package main;
 import java.math.BigDecimal;
 
 public class MyBankAccount implements BankAccount {
+	
 	private BigDecimal balance = new BigDecimal(0.0);
 	private long accountId = 0L;
 	
