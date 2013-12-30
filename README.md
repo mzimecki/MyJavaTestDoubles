@@ -1,4 +1,4 @@
 MyJavaTestDoubles
 =================
 
-Examples of TDD techniques
+Examples of TDD techniques. Standard eclipse project.
