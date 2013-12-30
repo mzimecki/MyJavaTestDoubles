@@ -19,9 +19,9 @@ public class BankAccountHibernateDao {
 		BankAccountHibernateDao.session = getSession();
 	}
 
-	public BankAccount findAccountById(long ticketId) {
+	public BankAccount findAccountById(long accountId) {
 		Criteria criteria = session.createCriteria(BankAccount.class);
-		criteria.add(Restrictions.eq("accountId", ticketId));
+		criteria.add(Restrictions.eq("accountId", accountId));
 		List<BankAccount> bankAccounts = criteria.list();
 		if (!bankAccounts.isEmpty()) {
 			return bankAccounts.get(0);
